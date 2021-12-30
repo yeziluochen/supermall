@@ -2,7 +2,7 @@
   <div class="recommend">   
     <div v-for="item in recommends" :key="item.id" class="recommend-item">
       <a :href="item.link">
-        <img :src="item.image" alt="">
+        <img :src="item.image" alt="" @load="imageLoad">
         <div>{{item.title}}</div>
       </a>
     </div>
@@ -10,10 +10,7 @@
 </template>
 
 <script>
-// 如果没有swiper文件夹下的index.js中export的统一导出就需要挨个引入
-// import Swiper from "components/common/swiper/Swiper";
-// import SwiperItem  from "components/common/swiper/SwiperItem";
-
+import { debounce } from 'common/utils'
 export default {
   name:"HomeRecommendView",
   props:{
@@ -28,11 +25,24 @@ export default {
     
   },
   data(){
-    return{
-     
+    return{  
     }
   },
-  
+   mounted() {
+     
+  },
+  methods: {
+    imageLoad(){
+      // console.log('HomeRecommendView加载完毕....')
+      const refresh = debounce(this.imageLoad_,1000)
+      refresh()
+    },
+    imageLoad_() {
+      this.$emit('recImageLoad')
+      console.log('HomeRecommendView加载完毕....')
+
+    }
+  },
 }
 </script>
 <style scoped>

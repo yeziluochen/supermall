@@ -3,7 +3,7 @@
     <swiper>
       <swiper-item v-for="item in banners" :key="item.id">
         <a :href="item.link">
-          <img :src="item.image">
+          <img :src="item.image" @load="imageLoad">
         </a>
       </swiper-item>
     </swiper>
@@ -32,7 +32,17 @@ export default {
   },
   data(){
     return{
-     
+     isLoad:false
+    }
+  },
+  methods: {
+    imageLoad() {
+      console.log('banner加载完成...')
+      // !this.isLoad取反即false的false为true验证通过
+      if (!this.isLoad){
+        this.$emit('swiperImageLoad')
+        this.isLoad = true
+      }
     }
   },
   

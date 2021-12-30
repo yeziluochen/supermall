@@ -14,20 +14,32 @@
 </template>
 
 <script>
+
+
 export default {
-  name:"Cart",
+  name:"TabControl",
+  props:{
+    titles:{
+      type:Array,
+      default(){
+        return []
+      }
+    }
+  },
   components:{
     
   },
   data(){
     return{
-     currentIndex:0,
-     titles:['流行','新款','精选'],
+     currentIndex:0
     }
   },
   methods:{
     itemClick(index){
       this.currentIndex = index;
+      this.$emit('tabClick',index)
+      // this.props.$emit('tabClick',index)
+       console.log(index);
     }
   }
   
