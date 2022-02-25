@@ -11,7 +11,7 @@ export default {
 <style scoped>
   #tab-bar{
     display: flex;
-    background-color: #999;
+    /* background-color: #999; */
     position: fixed;
     bottom: 0;
     left: 0;

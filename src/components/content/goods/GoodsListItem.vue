@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-item">   
-    <img :src="goodsItem.show.img" :alt="goodsItem.title" @load="imageLoad"/>
+  <div class="goods-item" @click="itemClick">   
+    <img v-lazy="showImage" :alt="goodsItem.title" @load="imageLoad"/>
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -25,15 +25,36 @@ export default {
   components:{
     
   },
-  data(){
-    return{
-     
+  computed: {
+    showImage() {
+      return this.goodsItem.image || this.goodsItem.show.img
     }
+
   },
   methods: {
     imageLoad() {
       // console.log('imageLoad')
-      this.$bus.$emit('itemImageLoad')
+      this.$bus.$emit('itemImgLoad')
+      
+
+/*    方案2：*/
+/*    if(this.$route.path.indexOf('/home')) {
+        this.$bus.$emit('homeItemImageLoad');
+      } else if(this.$route.path.indexOf('/detail')) {
+        this.$bus.$emit('detailItemImageLoad');
+      }*/
+      // console.log(this.goodsItem)
+
+    },
+    itemClick() {
+      // console.log('点击了一个产品')
+      this.$router.push('/detail/' + this.goodsItem.iid)//id跳转路由
+      // this.$router.push({
+      //   path: '/detail',
+      //   query: {
+
+      //   }
+      // })
     }
   }
   

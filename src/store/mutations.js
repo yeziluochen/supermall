@@ -1,0 +1,20 @@
+import {
+  ADD_TO_CART,
+  ADD_COUNTER
+} from './mutations-types'
+export default {
+  //mutations唯一的目的就是修改state中的状态
+  //mutation中的每一个方法都尽可能完成的事件比较单一一点
+  [ADD_COUNTER](state, payload) {
+    payload.count++;
+  },
+  [ADD_TO_CART](state, payload) {
+    payload.count = 1;
+    payload.checked = true;
+    state.cartList.push(payload)
+  },
+  // checkTo(state, payload) {
+  //   state.cartList[0].checked = payload.checked
+  //   console.log(state.cartList)
+  // }
+}

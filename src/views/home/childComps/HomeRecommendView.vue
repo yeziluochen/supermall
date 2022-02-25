@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { debounce } from 'common/utils'
 export default {
   name:"HomeRecommendView",
   props:{
@@ -32,14 +31,9 @@ export default {
      
   },
   methods: {
-    imageLoad(){
-      // console.log('HomeRecommendView加载完毕....')
-      const refresh = debounce(this.imageLoad_,1000)
-      refresh()
-    },
-    imageLoad_() {
+    imageLoad() {
       this.$emit('recImageLoad')
-      console.log('HomeRecommendView加载完毕....')
+      // console.log('HomeRecommendView加载完毕....')
 
     }
   },

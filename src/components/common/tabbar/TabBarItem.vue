@@ -20,7 +20,7 @@ export default {
     path:String,
     activeColor:{
       type:String,
-      default:'red'
+      default:'#ff5777'
     }
   },
   data(){
@@ -42,7 +42,7 @@ export default {
   methods:{
     itemClick(){
       this.$router.replace(this.path).catch((err) =>{err})
-      console.log('itemClick')
+      // console.log('itemClick')
     }
   }
 }

@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     imageLoad() {
-      console.log('banner加载完成...')
+      // console.log('banner加载完成...')
       // !this.isLoad取反即false的false为true验证通过
       if (!this.isLoad){
         this.$emit('swiperImageLoad')

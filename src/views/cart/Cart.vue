@@ -1,42 +1,56 @@
 <template>
-  <div class="tab-control">   
-    <!-- <h2>TabControl</h2> -->
-    <div  v-for="(item,index) in titles" 
-          :key="index" 
-          class="tab-control-item" 
-          :class="{active : index === currentIndex}"
-          @click="itemClick(index)"
-          >
-     <span>{{item}}</span>
-    </div>
-    <slot></slot>
+  <div class="cart">   
+    <nav-bar class="nav-bar">
+      <div slot="center">购物车({{length}})</div>
+    </nav-bar>
+    <!-- 商品列表 -->
+    <cart-list />
+    <!-- 底部汇总 -->
+    <cart-bottom-bar />
   </div>
 </template>
 
 <script>
+import NavBar from 'components/common/navbar/NavBar'
+import CartList from './childComps/CartList'
+import CartBottomBar from './childComps/CartBottomBar'
+
+import { mapGetters } from 'vuex'
+
 export default {
   name:"Cart",
-  components:{
-    
+  components:{  
+    NavBar,
+    CartList,
+    CartBottomBar,
   },
   data(){
     return{
-     currentIndex:0,
-     titles:['流行','新款','精选'],
+    //  currentIndex:0,
+    //  titles:['流行','新款','精选'],
     }
   },
   methods:{
-    itemClick(index){
-      this.currentIndex = index;
-    }
+
+  },
+  computed: {
+    //两种语法
+    // ...mapGetters(['cartLength','cartList'])
+    ...mapGetters({
+      length: 'cartLength',
+      list: 'cartList'
+    })
   }
   
 }
 </script>
 <style scoped>
- .tab-control{display: flex;text-align: center;height: 40px;line-height: 40px;background: #fff;}
- .tab-control-item{flex: 1;}
-  .tab-control-item span{padding: 5px;}
- .active{color: var(--color-high-text);}
- .active span{border-bottom: 3px solid var(--color-high-text);}
+.cart {
+  height: 100vh;
+}
+.nav-bar {
+  background-color: var(--color-tint);
+  color: #fff;
+  font-size: 700;
+}
 </style>

@@ -1,35 +1,43 @@
 <template>
-  <div class="recommend">   
-    <h2>user</h2>
+  <div class="tab-control">   
+    <div>
+      <h2>user</h2>
+    </div>
+    <div  v-for="(item,index) in titles" 
+          :key="index" 
+          class="tab-control-item" 
+          :class="{active : index === currentIndex}"
+          @click="itemClick(index)"
+          >
+     <span>{{item}}</span>
+    </div>
+    <slot></slot>
   </div>
 </template>
 
 <script>
-// 如果没有swiper文件夹下的index.js中export的统一导出就需要挨个引入
-// import Swiper from "components/common/swiper/Swiper";
-// import SwiperItem  from "components/common/swiper/SwiperItem";
-
 export default {
-  name:"user",
-  props:{
-    recommends:{
-      type:Array,
-      default(){
-        return []
-      }
-    }
-  },
-  components:{
-    
+  name:"User",
+  components:{  
   },
   data(){
     return{
-     
+     currentIndex:0,
+     titles:['流行','新款','精选'],
     }
   },
+  methods:{
+    itemClick(index){
+      this.currentIndex = index;
+    }
+  }
   
 }
 </script>
 <style scoped>
- 
+ .tab-control{display: flex;text-align: center;height: 40px;line-height: 40px;background: #fff;}
+ .tab-control-item{flex: 1;}
+  .tab-control-item span{padding: 5px;}
+ .active{color: var(--color-high-text);}
+ .active span{border-bottom: 3px solid var(--color-high-text);}
 </style>

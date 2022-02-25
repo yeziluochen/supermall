@@ -41,5 +41,4 @@ export default {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-.goods{}
 </style>

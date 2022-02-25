@@ -12,7 +12,7 @@
     <div class="recommend">
       <div v-for="item in recommends" :key="item.id" class="recommend-item">
         <a :href="item.link">
-          <img :src="item.image" alt="">
+          <img :src="item.image" alt=" " @load="imageLoad">
           <div>{{item.title}}</div>
         </a>
       </div>
@@ -43,6 +43,11 @@ export default {
    
   },
   methods: {
+    imageLoad() {
+      this.$emit('featureImageLoad')
+      // console.log('FeatureView加载完毕....')
+
+    }
   },
 }
 </script>
