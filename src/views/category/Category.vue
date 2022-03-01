@@ -6,16 +6,24 @@
 
       <scroll id="tab-content" :data="[categoryData]">
         <div>
-          <!-- <tab-content-category
+          <tab-content-category
             :subcategories="showSubcategory"
-          ></tab-content-category> -->
-          <!-- <tab-control
-            :titles="['综合', '新品', '销量']"
-            @tabClick="tabClick"
-          ></tab-control> -->
-          <!-- <tab-content-detail
+          ></tab-content-category>
+
+          <div class="tab-control">   
+            <div  v-for="(item,indexo) in titles" 
+                  :key="indexo" 
+                  class="tab-control-item" 
+                  :class="{active : indexo === currentIndexo}"
+                  @click="itemClick(indexo)"
+                  >
+              <span>{{item}}</span>
+            </div>
+          </div>
+
+          <tab-content-detail
             :category-detail="showCategoryDetail"
-          ></tab-content-detail> -->
+          ></tab-content-detail>
         </div>
       </scroll>
     </div>
@@ -30,8 +38,8 @@ import { POP, SELL, NEW } from "common/const";
 import { tabControlMixin } from "common/mixin";
 
 import TabMenu from "./childComps/TabMenu";
-// import TabContentCategory from "./childComps/TabContentCategory";
-// import TabContentDetail from "./childComps/TabContentDetail";
+import TabContentCategory from "./childComps/TabContentCategory";
+import TabContentDetail from "./childComps/TabContentDetail";
 
 import {
   getCategory,
@@ -46,15 +54,18 @@ export default {
     TabMenu,
     // TabControl,
     Scroll,
-    // TabContentCategory,
-    // TabContentDetail,
+    TabContentCategory,
+    TabContentDetail,
   },
   mixins: [tabControlMixin],
   data() {
     return {
       categories: [],
       categoryData: {},
+      categoryDatas: {},
       currentIndex: -1,
+      currentIndexo:0,
+      titles:['流行','新款','精选'],
     };
   },
   created() {
@@ -83,12 +94,15 @@ export default {
           this.categoryData[i] = {
             subcategories: {},
             categoryDetail: {
-              pop: [],
-              new: [],
-              sell: [],
+              'pop': [],
+              'new': [],
+              'sell': [],
             },
           };
         }
+        console.log(this.categoryData[2])
+        console.log(this.categoryData[0])
+
         // 3.请求第一个分类的数据
         this._getSubcategories(0);
       });
@@ -113,6 +127,7 @@ export default {
         // 3.将获取的数据保存下来
         this.categoryData[this.currentIndex].categoryDetail[type] = res;
         this.categoryData = { ...this.categoryData };
+        console.log(this.categoryDatas)
       });
     },
     /**
@@ -121,7 +136,14 @@ export default {
     selectItem(index) {
       this._getSubcategories(index);
     },
+    itemClick(indexo){
+      this.currentIndexo = indexo;
+      console.log(this.currentIndexo)
+    }
   },
+  mounted() {
+
+  }
 };
 </script>
 
@@ -147,7 +169,18 @@ export default {
 }
 
 #tab-content {
-  height: 100%;
+  /* height: 100%; */
   flex: 1;
+  overflow: hidden;
+  /* position: absolute; */
+  height: calc(100%);
 }
+
+
+
+ .tab-control{display: flex;text-align: center;height: 40px;line-height: 40px;background: #fff;}
+ .tab-control-item{flex: 1;}
+  .tab-control-item span{padding: 5px;}
+ .active{color: var(--color-high-text);}
+ .active span{border-bottom: 3px solid var(--color-high-text);}
 </style>

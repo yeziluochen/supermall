@@ -9,9 +9,9 @@
             >
       <span>{{item}}</span>
       </div>
-      <slot></slot>
+      <!-- <slot></slot> -->
     </div>
-    <div>搜索</div>
+    <!-- <div>搜索</div> -->
   </div>
 </template>
 
@@ -29,6 +29,7 @@ export default {
   methods:{
     itemClick(index){
       this.currentIndex = index;
+      console.log(this.currentIndex)
     }
   }
   

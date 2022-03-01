@@ -1,139 +1,109 @@
 <template>
-  <scroll class="content">
-    <ul class="content">
-      
-      <li>分类列表1</li>
-      <li>分类列表2</li>
-      <li>分类列表3</li>
-      <li>分类列表4</li>
-      <li>分类列表5</li>
-      <li>分类列表6</li>
-      <li>分类列表7</li>
-      <li>分类列表8</li>
-      <li>分类列表9</li>
-      <li>分类列表10</li>
-      <li>分类列表11</li>
-      <li>分类列表12</li>
-      <li>分类列表13</li>
-      <li>分类列表14</li>
-      <li>分类列表15</li>
-      <li>分类列表16</li>
-      <li>分类列表17</li>
-      <li>分类列表18</li>
-      <li>分类列表19</li>
-      <li>分类列表20</li>
-      <li>分类列表21</li>
-      <li>分类列表22</li>
-      <li>分类列表23</li>
-      <li>分类列表24</li>
-      <li>分类列表25</li>
-      <li>分类列表26</li>
-      <li>分类列表27</li>
-      <li>分类列表28</li>
-      <li>分类列表29</li>
-      <li>分类列表30</li>
-      <li>分类列表31</li>
-      <li>分类列表32</li>
-      <li>分类列表33</li>
-      <li>分类列表34</li>
-      <li>分类列表35</li>
-      <li>分类列表36</li>
-      <li>分类列表37</li>
-      <li>分类列表38</li>
-      <li>分类列表39</li>
-      <li>分类列表40</li>
-      <li>分类列表41</li>
-      <li>分类列表42</li>
-      <li>分类列表43</li>
-      <li>分类列表44</li>
-      <li>分类列表45</li>
-      <li>分类列表46</li>
-      <li>分类列表47</li>
-      <li>分类列表48</li>
-      <li>分类列表49</li>
-      <li>分类列表50</li>
-      <li>分类列表51</li>
-      <li>分类列表52</li>
-      <li>分类列表53</li>
-      <li>分类列表54</li>
-      <li>分类列表55</li>
-      <li>分类列表56</li>
-      <li>分类列表57</li>
-      <li>分类列表58</li>
-      <li>分类列表59</li>
-      <li>分类列表60</li>
-      <li>分类列表61</li>
-      <li>分类列表62</li>
-      <li>分类列表63</li>
-      <li>分类列表64</li>
-      <li>分类列表65</li>
-      <li>分类列表66</li>
-      <li>分类列表67</li>
-      <li>分类列表68</li>
-      <li>分类列表69</li>
-      <li>分类列表70</li>
-      <li>分类列表71</li>
-      <li>分类列表72</li>
-      <li>分类列表73</li>
-      <li>分类列表74</li>
-      <li>分类列表75</li>
-      <li>分类列表76</li>
-      <li>分类列表77</li>
-      <li>分类列表78</li>
-      <li>分类列表79</li>
-      <li>分类列表80</li>
-      <li>分类列表81</li>
-      <li>分类列表82</li>
-      <li>分类列表83</li>
-      <li>分类列表84</li>
-      <li>分类列表85</li>
-      <li>分类列表86</li>
-      <li>分类列表87</li>
-      <li>分类列表88</li>
-      <li>分类列表89</li>
-      <li>分类列表90</li>
-      <li>分类列表91</li>
-      <li>分类列表92</li>
-      <li>分类列表93</li>
-      <li>分类列表94</li>
-      <li>分类列表95</li>
-      <li>分类列表96</li>
-      <li>分类列表97</li>
-      <li>分类列表98</li>
-      <li>分类列表99</li>
-      <li>分类列表100</li>
-    </ul>
-  </scroll>
+  <div id="profile">
+    <nav-bar class="nav-bar"><div slot="center">我的衣柜</div></nav-bar>
+    <!--1.单独封装一个组件: 利用slot知识点-->
+    <UserInfo></UserInfo>
+
+    <!--2.没有单独封装: 不同的地方太多, 需要传过多的参数-->
+    <section class="account">
+      <div class="account-item">
+        <div class="number">
+          <span class="balance">0.00</span>元
+        </div>
+        <div class="account-info">我的余额</div>
+      </div>
+      <div class="account-item">
+        <div class="number">
+          <span class="balance">0</span>个
+        </div>
+        <div class="account-info">我的优惠</div>
+      </div>
+      <div class="account-item">
+        <div class="number">
+          <span class="balance">0</span>分
+        </div>
+        <div class="account-info">我的积分</div>
+      </div>
+    </section>
+
+    <!--3.封装成一个整体-->
+    <list-view :list-data="orderList" class="order-list"></list-view>
+    <list-view :list-data="serviceList" class="service-list"></list-view>
+  </div>
 </template>
 
 <script>
-import Scroll from 'components/common/scroll/Scroll'
-export default {
-  name:"Profile",
-  components: {
-    Scroll,
-  },
-  data() {
-    return {
-      scroll: null
+  import UserInfo from './childComps/UserInfo'
+  import ListView from './childComps/ListView'
+  import NavBar from 'components/common/navbar/NavBar'
+
+	export default {
+		name: "Profile",
+    components: {
+		  UserInfo, ListView, NavBar
+    },
+    data: function () {
+		  return {
+		    orderList: [
+          {icon: '#order', iconColor: '#ff8198', info: '我的消息'},
+          {icon: '#point', iconColor: '#fc7b53', info: '积分商城'},
+          {icon: '#vip', iconColor: '#ffc636', info: '会员卡'},
+        ],
+        serviceList: [
+          {icon: '#service', iconColor: '#ff8198', info: '我的购物车'},
+          {icon: '#download', iconColor: '#ff8198', info: '下载购物APP'},
+        ]
+      }
+    },
+    mounted: function () {
     }
-  },
-  mounted() {
-    
-  },
-  methods: {
-    btnClick() {
-      console.log('点击btnClick')
-    }
+	}
+</script>
+
+<style scoped>
+  #profile {
+    background-color: #f2f2f2;
   }
 
-}
-</script>
-<style scoped>
-.wrapper{
-  background: red;
-  height: 400px;
-  overflow: hidden;
-  /* overflow-y: scroll; */
-}
+  .nav-bar {
+    background-color: var(--color-tint);
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .account {
+    display: flex;
+  }
+
+  .account-item {
+    width: 100%;
+    background-color: #fff;
+    margin-right: 1px;
+    text-align: center;
+  }
+
+  .account-item:last-of-type {
+    margin-right: 0;
+  }
+
+  .account-item {
+    color: #666;
+    font-size: 13px;
+    padding: 18px;
+  }
+
+  .account-item .balance {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff5f3e;
+  }
+
+  .account-info {
+    margin-top: 6px;
+  }
+
+  .order-list, .service-list {
+    margin-top: 12px;
+  }
+
 </style>

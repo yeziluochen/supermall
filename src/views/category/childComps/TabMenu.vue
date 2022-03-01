@@ -41,7 +41,8 @@ import Scroll from 'components/common/scroll/Scroll'
 <style scoped>
   #tab-menu {
     background-color: #f6f6f6;
-    height: 100%;
+    /* height: 100%; */
+    overflow: hidden;
     width: 100px;
     box-sizing: border-box;
   }

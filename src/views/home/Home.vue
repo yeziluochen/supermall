@@ -90,6 +90,7 @@ export default {
   computed: {
     showGoods() {
       return this.goods[this.currentType].list
+      
     }
   },
   destroyed() {
@@ -136,6 +137,7 @@ export default {
     // 在min.js中赋予了$bus一个·vue实例
     // this.$bus.$on('itemImgLoad',this.itemImgListener )
     // this.imageLoad_()
+    console.log(this.goods[this.currentType].list)
   },
   methods:{
     /*
@@ -209,17 +211,17 @@ export default {
       })
     },
     // type：['pop','new','sell']
-     getHomeGoods(type) {
-       const page = this.goods[type].page + 1//请求第下页
-       getHomeGoods(type, page).then(res => {
-        // console.log(res)
-        // 将请求到的list数组通过解构push到goods.list中
+    getHomeGoods(type) {
+      const page = this.goods[type].page + 1//请求第下页
+      getHomeGoods(type, page).then(res => {
+      // console.log(res)
+      // 将请求到的list数组通过解构push到goods.list中
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1
 
         this.$refs.scroll.scroll.finishPullUp()
       })
-     }
+    }
   }
 }
 </script>
