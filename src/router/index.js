@@ -33,10 +33,10 @@ const routes = [
     path: '/profile',
     component: Profile
   },
-  {
-    path: '/user',
-    component: user
-  },
+  // {
+  //   path: '/user',
+  //   component: user
+  // },
   {
     path: '/detail/:iid',
     component: Detail

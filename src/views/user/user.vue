@@ -1,17 +1,17 @@
 <template>
-  <div class="tab-control">   
-    <div>
-      <h2>user</h2>
+  <div>
+    <div class="tab-control">   
+      <div  v-for="(item,index) in titles" 
+            :key="index" 
+            class="tab-control-item" 
+            :class="{active : index === currentIndex}"
+            @click="itemClick(index)"
+            >
+      <span>{{item}}</span>
+      </div>
+      <slot></slot>
     </div>
-    <div  v-for="(item,index) in titles" 
-          :key="index" 
-          class="tab-control-item" 
-          :class="{active : index === currentIndex}"
-          @click="itemClick(index)"
-          >
-     <span>{{item}}</span>
-    </div>
-    <slot></slot>
+    <div>搜索</div>
   </div>
 </template>
 
